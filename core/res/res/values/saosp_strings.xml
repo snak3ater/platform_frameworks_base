@@ -127,4 +127,11 @@
     <string name="adb_active_custom_tile_both">USB &amp; network</string>
     <string name="adb_active_custom_tile_usb">USB</string>
     <string name="adb_active_custom_tile_net">Network</string>
+
+    <!-- ADB over network notification -->
+    <string name="adb_net_active_notification_title">ADB over network enabled</string>
+    <!-- ADB over USB and network notification -->
+    <string name="adb_both_active_notification_title">ADB over USB &amp; network enabled</string>
+    <!-- ADB notification message-->
+    <string name="adb_active_generic_notification_message">Touch to disable debugging.</string>
 </resources>
