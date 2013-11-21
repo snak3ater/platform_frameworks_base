@@ -272,6 +272,7 @@ public class Resources {
             CompatibilityInfo compatInfo, IBinder token) {
         mAssets = assets;
         mMetrics.setToDefaults();
+        mMetrics.updateDensity();
         if (compatInfo != null) {
             mCompatibilityInfo = compatInfo;
         }
@@ -1926,6 +1927,7 @@ public class Resources {
             if (mConfiguration.densityDpi != Configuration.DENSITY_DPI_UNDEFINED) {
                 mMetrics.densityDpi = mConfiguration.densityDpi;
                 mMetrics.density = mConfiguration.densityDpi * DisplayMetrics.DENSITY_DEFAULT_SCALE;
+                mMetrics.updateDensity();
             }
             mMetrics.scaledDensity = mMetrics.density * mConfiguration.fontScale;
 
@@ -2399,7 +2401,7 @@ public class Resources {
             }
             sPreloaded = true;
             mPreloading = true;
-            sPreloadedDensity = DisplayMetrics.DENSITY_DEVICE;
+            sPreloadedDensity = DisplayMetrics.getDeviceDensity();
             mConfiguration.densityDpi = sPreloadedDensity;
             updateConfiguration(null, null);
         }
