@@ -42,7 +42,15 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.*;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.Surface;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -641,6 +649,55 @@ public class NavigationBarView extends LinearLayout {
         if (mIsLayoutRtl != isLayoutRtl) {
             mIsLayoutRtl = isLayoutRtl;
             reorient();
+
+            // We swap all children of the 90 and 270 degree layouts, since they are vertical
+            View rotation90 = mRotatedViews[Surface.ROTATION_90];
+            swapChildrenOrderIfVertical(rotation90.findViewById(R.id.nav_buttons));
+            adjustExtraKeyGravity(rotation90, isLayoutRtl);
+
+            View rotation270 = mRotatedViews[Surface.ROTATION_270];
+            if (rotation90 != rotation270) {
+                swapChildrenOrderIfVertical(rotation270.findViewById(R.id.nav_buttons));
+                adjustExtraKeyGravity(rotation270, isLayoutRtl);
+            }
+            mIsLayoutRtl = isLayoutRtl;
+        }
+    }
+
+    private void adjustExtraKeyGravity(View navBar, boolean isLayoutRtl) {
+        View menu = getBackButton();
+        View imeSwitcher = navBar.findViewById(R.id.ime_switcher);
+        if (menu != null) {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) menu.getLayoutParams();
+            lp.gravity = isLayoutRtl ? Gravity.BOTTOM : Gravity.TOP;
+            menu.setLayoutParams(lp);
+        }
+        if (imeSwitcher != null) {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) imeSwitcher.getLayoutParams();
+            lp.gravity = isLayoutRtl ? Gravity.BOTTOM : Gravity.TOP;
+            imeSwitcher.setLayoutParams(lp);
+        }
+    }
+
+    /**
+     * Swaps the children order of a LinearLayout if it's orientation is Vertical
+     *
+     * @param group The LinearLayout to swap the children from.
+     */
+    private void swapChildrenOrderIfVertical(View group) {
+        if (group instanceof LinearLayout) {
+            LinearLayout linearLayout = (LinearLayout) group;
+            if (linearLayout.getOrientation() == VERTICAL) {
+                int childCount = linearLayout.getChildCount();
+                ArrayList<View> childList = new ArrayList<>(childCount);
+                for (int i = 0; i < childCount; i++) {
+                    childList.add(linearLayout.getChildAt(i));
+                }
+                linearLayout.removeAllViews();
+                for (int i = childCount - 1; i >= 0; i--) {
+                    linearLayout.addView(childList.get(i));
+                }
+            }
         }
     }
 
