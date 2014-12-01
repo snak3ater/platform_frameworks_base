@@ -3236,6 +3236,12 @@ public final class Settings {
          */
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
+         /**
+         * Recents Show/Hide Search Bar
+         * @hide
+         */
+        public static final String RECENTS_SHOW_HIDE_SEARCH_BAR = "recents_show_hide_search_bar";
+
         /**
          * Forces formal text input.  1 to replace emoticon key with enter key.
          * @hide
