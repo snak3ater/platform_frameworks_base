@@ -5862,6 +5862,14 @@ public final class Settings {
         public static final String QS_USE_FOUR_COLUMNS = "qs_use_four_columns";
 
         /**
+         * Whether to display a menu containing 'Wipe data', 'Force close' and other options
+         * in the notification area and in the recent app list
+         * @hide
+         */
+        public static final String DEVELOPMENT_SHORTCUT = "development_shortcut";
+
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
@@ -5915,7 +5923,8 @@ public final class Settings {
             ADVANCED_REBOOT,          
             PRIVACY_GUARD_DEFAULT,
             PRIVACY_GUARD_NOTIFICATION,
-            STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD
+            STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD,
+            DEVELOPMENT_SHORTCUT
         };
 
         /**
