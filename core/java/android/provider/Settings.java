@@ -5645,6 +5645,12 @@ public final class Settings {
          */
         public static final String ADVANCED_REBOOT = "advanced_reboot";
 
+         /**
+         * Whether user is allowed to pull down quick settings on secure keyguard.
+         * @hide
+         */
+        public static final String STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD = "status_bar_locked_on_secure_keyguard";
+
         /** Whether to show the brightness slider in quick settings panel.
          *
          * @hide
@@ -5769,7 +5775,8 @@ public final class Settings {
             SLEEP_TIMEOUT,
             ADVANCED_REBOOT,          
             PRIVACY_GUARD_DEFAULT,
-            PRIVACY_GUARD_NOTIFICATION
+            PRIVACY_GUARD_NOTIFICATION,
+            STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD
         };
 
         /**
