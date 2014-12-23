@@ -35,6 +35,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.systemui.BatteryMeterView;
+import com.android.systemui.BatteryLevelTextView;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.KeyguardUserSwitcher;
@@ -54,7 +55,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     private View mSystemIconsSuperContainer;
     private MultiUserSwitch mMultiUserSwitch;
     private ImageView mMultiUserAvatar;
-    private TextView mBatteryLevel;
+    private BatteryLevelTextView mBatteryLevel;
 
     private BatteryController mBatteryController;
     private KeyguardUserSwitcher mKeyguardUserSwitcher;
@@ -87,25 +88,13 @@ public class KeyguardStatusBarView extends RelativeLayout
         mSystemIconsSuperContainer = findViewById(R.id.system_icons_super_container);
         mMultiUserSwitch = (MultiUserSwitch) findViewById(R.id.multi_user_switch);
         mMultiUserAvatar = (ImageView) findViewById(R.id.multi_user_avatar);
-        mBatteryLevel = (TextView) findViewById(R.id.battery_level);
+        mBatteryLevel = (BatteryLevelTextView) findViewById(R.id.battery_level_text);
         mCarrierLabel = (TextView) findViewById(R.id.keyguard_carrier_text);
         loadDimens();
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(getContext(),
                 android.R.interpolator.fast_out_slow_in);
         updateUserSwitcher();
         updateVisibilities();
-    }
-
-    @Override
-    protected void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Respect font size setting.
-        mCarrierLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(
-                        com.android.internal.R.dimen.text_size_small_material));
-        mBatteryLevel.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.battery_level_text_size));
     }
 
     private void loadDimens() {
@@ -122,8 +111,8 @@ public class KeyguardStatusBarView extends RelativeLayout
         } else if (mMultiUserSwitch.getParent() == this && mKeyguardUserSwitcherShowing) {
             removeView(mMultiUserSwitch);
         }
-        mBatteryLevel.setVisibility(
-                (mBatteryCharging || mShowBatteryText) ? View.VISIBLE : View.GONE);
+        mBatteryLevel.setShowPercent(
+                (mBatteryCharging || mShowBatteryText) ? true : false);
     }
 
     private void updateSystemIconsLayoutParams() {
@@ -171,7 +160,6 @@ public class KeyguardStatusBarView extends RelativeLayout
 
     @Override
     public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
-        mBatteryLevel.setText(getResources().getString(R.string.battery_level_template, level));
         boolean changed = mBatteryCharging != charging;
         mBatteryCharging = charging;
         if (changed) {
@@ -276,4 +264,3 @@ public class KeyguardStatusBarView extends RelativeLayout
         }
     }
 }
-
