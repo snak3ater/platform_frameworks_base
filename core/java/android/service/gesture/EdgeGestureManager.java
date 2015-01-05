@@ -176,9 +176,7 @@ public class EdgeGestureManager {
         }
         try {
             IEdgeGestureHostCallback callback = mPs.registerEdgeGestureActivationListener(listener.mDelegator);
-	if (listener != null) {
             listener.setHostCallback(callback);
-	}
             return true;
         } catch (RemoteException e) {
             Slog.e(TAG, "Failed to set edge gesture activation listener: " + e.getMessage());
