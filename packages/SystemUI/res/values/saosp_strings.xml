@@ -170,4 +170,8 @@
     <!-- Battery Saver Dismiss -->
     <string name="battery_saver_dismiss_title">Dismiss</string>
     <string name="battery_saver_notification_action_text_short">Turn off</string>
+
+    <!-- Adb over network tile -->    
+    <string name="quick_settings_network_adb_label">ADB over network</string>
+
 </resources>

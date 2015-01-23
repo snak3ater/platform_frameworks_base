@@ -43,6 +43,7 @@ public class QSConstants {
     public static final String TILE_SCREENSHOT = "screenshot";
     public static final String TILE_HEADS_UP = "heads_up";
     public static final String TILE_AMBIENT_DISPLAY = "ambient_display";
+    public static final String TILE_ADB_NETWORK = "adb_network";
 
     public static final String DYNAMIC_TILE_NEXT_ALARM = "next_alarm";
     public static final String DYNAMIC_TILE_IME_SELECTOR = "ime_selector";
@@ -76,6 +77,7 @@ public class QSConstants {
         TILES_AVAILABLE.add(TILE_SCREENSHOT);
         TILES_AVAILABLE.add(TILE_HEADS_UP);
         TILES_AVAILABLE.add(TILE_AMBIENT_DISPLAY);
+        TILES_AVAILABLE.add(TILE_ADB_NETWORK);
 
         DYNAMIC_TILES_AVAILABLE.add(DYNAMIC_TILE_NEXT_ALARM);
         DYNAMIC_TILES_AVAILABLE.add(DYNAMIC_TILE_IME_SELECTOR);
