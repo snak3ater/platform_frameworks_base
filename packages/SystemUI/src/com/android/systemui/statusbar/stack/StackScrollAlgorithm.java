@@ -210,7 +210,7 @@ public class StackScrollAlgorithm {
             float newNotificationEnd = newYTranslation + newHeight;
 
             float clipHeight;
-            if (previousNotificationIsSwiped && mPerformClipping) {
+            if (previousNotificationIsSwiped) {
                 // When the previous notification is swiped, we don't clip the content to the
                 // bottom of it.
                 clipHeight = newHeight;
@@ -223,7 +223,7 @@ public class StackScrollAlgorithm {
                     // corners of the notifications, but only if we are not fully overlapped by
                     // the top card.
                     float clippingCorrection = state.dimmed
-                            ? 0
+                            ? (mPerformClipping ? 0 : newHeight)
                             : mRoundedRectCornerRadius * state.scale;
                     clipHeight += clippingCorrection;
                 }
