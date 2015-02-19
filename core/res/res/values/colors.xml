@@ -174,4 +174,9 @@
     <color name="Pink_800">#ffad1457</color>
     <color name="Red_700">#ffc53929</color>
     <color name="Red_800">#ffb93221</color>
+
+    <!-- Theme Engine -->
+    <color name="notification_mtrl_action_textcolor">@color/secondary_text_material_light</color>
+    <color name="notification_mtrl_big_picture_bg">#CCEEEEEE</color>
+    <color name="resolver_list_bg">@color/white</color>
 </resources>
