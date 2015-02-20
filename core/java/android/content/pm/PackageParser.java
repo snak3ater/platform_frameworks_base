@@ -1059,9 +1059,9 @@ public class PackageParser {
 
     private ArrayList<String> scanPackageOverlays(File originalFile) {
         Set<String> overlayTargets = new HashSet<String>();
-
+        ZipFile privateZip = null;
         try {
-            final ZipFile privateZip = new ZipFile(originalFile.getPath());
+            privateZip = new ZipFile(originalFile.getPath());
             final Enumeration<? extends ZipEntry> privateZipEntries = privateZip.entries();
             while (privateZipEntries.hasMoreElements()) {
                 final ZipEntry zipEntry = privateZipEntries.nextElement();
@@ -1075,6 +1075,14 @@ public class PackageParser {
         } catch(Exception e) {
             e.printStackTrace();
             overlayTargets.clear();
+        } finally {
+            if (privateZip != null) {
+                try {
+                    privateZip.close();
+                } catch (Exception e) {
+                    //Ignore
+                }
+            }
         }
 
         ArrayList<String> overlays = new ArrayList<String>();
@@ -1083,8 +1091,9 @@ public class PackageParser {
     }
 
     private boolean packageHasIconPack(File originalFile) {
+        ZipFile privateZip = null;
         try {
-            final ZipFile privateZip = new ZipFile(originalFile.getPath());
+            privateZip = new ZipFile(originalFile.getPath());
             final Enumeration<? extends ZipEntry> privateZipEntries = privateZip.entries();
             while (privateZipEntries.hasMoreElements()) {
                 final ZipEntry zipEntry = privateZipEntries.nextElement();
@@ -1097,6 +1106,14 @@ public class PackageParser {
             }
         } catch(Exception e) {
             Log.e(TAG, "Could not read zip entries while checking if apk has icon pack", e);
+        } finally {
+            if (privateZip != null) {
+                try {
+                    privateZip.close();
+                } catch (Exception e) {
+                    //Ignore
+                }
+            }
         }
         return false;
     }
