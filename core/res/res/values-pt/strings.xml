@@ -1341,7 +1341,7 @@
     <string name="dlg_ok" msgid="7376953167039865701">"OK"</string>
     <string name="usb_mtp_notification_title" msgid="3699913097391550394">"Conectado como um dispositivo de mídia"</string>
     <string name="usb_ptp_notification_title" msgid="1960817192216064833">"Conectado como câmera"</string>
-    <string name="usb_charging_notification_title">Conectado no modo carregamento</string>    
+    <string name="usb_charging_notification_title">Conectado no modo somente carregar</string>    
     <string name="usb_cd_installer_notification_title" msgid="6774712827892090754">"Conectados como um instalador"</string>
     <string name="usb_accessory_notification_title" msgid="7848236974087653666">"Conectado a um acessório USB"</string>
     <string name="usb_notification_message" msgid="2290859399983720271">"Toque para obter outras opções USB."</string>
@@ -1876,11 +1876,13 @@
     <string name="theme_reset_notification_title">Redefinição de tema</string>
     <string name="theme_reset_notification_body">Tema do sistema redefinido devido a várias falhas do aplicativo</string>
 
-    <!-- Slim Roms seekbar -->
-    <string name="default_string">Padrão</string>
-
     <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_accessTorchService">Acesso ao serviço da tocha</string>
     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_accessTorchService">Permite que um aplicativo acesse o serviço da tocha. Nunca deve ser necessário para um aplicativo normal.</string>
+
+    <!-- See EXTMEDIA_FORMAT.   This is the message. [CHAR LIMIT=NONE] -->
+    <string name="extmedia_format_message_cm" product="nosdcard">Todos os dados armazenados no armazenamento USB (em \'%1$s\') serão apagados. Não é possível\'reverter essa ação!</string>
+    <!-- See EXTMEDIA_FORMAT.   This is the message. -->
+    <string name="extmedia_format_message_cm" product="default">Todos os dados armazenados no cartão (em \'%1$s\') serão apagados. Não é possível\'reverter essa ação!</string>
 </resources>

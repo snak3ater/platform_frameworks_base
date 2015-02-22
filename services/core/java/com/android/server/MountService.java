@@ -1329,9 +1329,22 @@ class MountService extends IMountService.Stub
         mVolumeStates.clear();
 
         Resources resources = mContext.getResources();
-
         int id = com.android.internal.R.xml.storage_list;
-        XmlResourceParser parser = resources.getXml(id);
+        String pkg = mContext.getPackageName();
+        int idAlt = resources.getIdentifier("storage_list_legacy", "xml", pkg);
+        String legacy = SystemProperties.get("sys.storage_legacy", "");
+        XmlResourceParser parser = null;
+
+        if ((legacy.equals("1") || legacy.equalsIgnoreCase("true")) && idAlt != 0) {
+            parser = resources.getXml(idAlt);
+            Slog.i(TAG, "readStorageListLocked: using legacy storage list");
+        }
+
+        if (parser == null) {
+            Slog.i(TAG, "readStorageListLocked: using default storage list");
+            parser = resources.getXml(id);
+        }
+
         AttributeSet attrs = Xml.asAttributeSet(parser);
 
         try {
@@ -1470,6 +1483,16 @@ class MountService extends IMountService.Stub
         return null;
     }
 
+    private boolean hasUmsVolume() {
+        final StorageVolume[] storageVolumes = getVolumeList();
+        for(StorageVolume volume : storageVolumes) {
+            if (volume.allowMassStorage()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Constructs a new MountService instance
      *
@@ -1497,9 +1520,7 @@ class MountService extends IMountService.Stub
         userFilter.addAction(Intent.ACTION_USER_REMOVED);
         mContext.registerReceiver(mUserReceiver, userFilter, null, mHandler);
 
-        // Watch for USB changes on primary volume
-        final StorageVolume primary = getPrimaryPhysicalVolume();
-        if (primary != null && primary.allowMassStorage()) {
+        if (hasUmsVolume() || SystemProperties.getBoolean("persist.sys.ums", true)) {
             mContext.registerReceiver(
                     mUsbReceiver, new IntentFilter(UsbManager.ACTION_USB_STATE), null, mHandler);
         }
