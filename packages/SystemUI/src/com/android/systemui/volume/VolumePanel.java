@@ -1290,7 +1290,8 @@ public class VolumePanel extends Handler {
 
     private boolean isShowing() {
         //Return whether parent view is currently attached to a window if mDialog is null
-        return (mDialog != null) ? mDialog.isShowing() : mParent.isAttachedToWindow
+        return (mDialog != null) ? mDialog.isShowing() : mParent.isAttachedToWindow();
+	}
 
     protected void onPlaySound(int streamType, int flags) {
         // If preference is no sound - just exit here

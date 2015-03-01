@@ -1843,7 +1843,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                 final boolean volumeKeySounds = getContext().getResources().getBoolean(
                         com.android.internal.R.bool.config_useVolumeKeySounds);
                 if (volumeKeySounds && Settings.System.getInt(getContext().getContentResolver(),
-                        Settings.System.VOLUME_ADJUST_SOUND, 1) == 1) {
+                        Settings.System.VOLUME_KEY_ADJUST_SOUND, 1) == 1) {
                     if (mMediaController != null) {
                         mMediaController.adjustVolume(0, AudioManager.FLAG_PLAY_SOUND
                                 | AudioManager.FLAG_VIBRATE);
