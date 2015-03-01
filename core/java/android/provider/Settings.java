@@ -2091,6 +2091,11 @@ public final class Settings {
         public static final String SHOW_ALARM_ICON = "show_alarm_icon";
 
         /**
+         * Option to hide the Bluetooth icon in the status bar when disconnected.
+         */
+        public static final String SHOW_BLUETOOTH_ICON = "show_bluetooth_icon";
+
+        /**
          * Scaling factor for fonts, float.
          */
         public static final String FONT_SCALE = "font_scale";
@@ -2181,25 +2186,28 @@ public final class Settings {
          */
         public static final String STATUS_BAR_TICKER_ENABLED = "status_bar_ticker_enabled";
 
-        /** Whether to allow one finger quick settings expansion on the right side of the statusbar.
-         *
+        /**
+         * Whether to allow one finger quick settings expansion on the right side of the statusbar.
          * @hide
          */
         public static final String STATUS_BAR_QUICK_QS_PULLDOWN = "status_bar_quick_qs_pulldown";
 
         /**
-         Deprecated Use {@link android.provider.Settings.Secure.QS_TILES}
+         * List of QS tile names
+         * @deprecated Use {@link android.provider.Settings.Secure#QS_TILES} instead
          * @hide
          */
         @Deprecated
-        public static final String QS_TILES = "sysui_qs_tiles";
+        public static final String QS_TILES = Secure.QS_TILES;
 
         /**
-         * Deprecated Use {@link android.provider.Settings.Secure.QS_USE_MAIN_TILES}
+         * Use "main" tiles on the first row of the quick settings panel
+         * 0 = no, 1 = yes
+         * @deprecated Use {@link android.provider.Settings.Secure#QS_USE_MAIN_TILES} instead
          * @hide
          */
         @Deprecated
-        public static final String QS_USE_MAIN_TILES = "sysui_qs_main_tiles";
+        public static final String QS_USE_MAIN_TILES = Secure.QS_USE_MAIN_TILES;
 
         /**
          * Enable/disable overwrite default value for ambient display
@@ -3192,12 +3200,14 @@ public final class Settings {
          */
         public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 
-        /** Whether to show the brightness slider in quick settings panel.
-         *
+        /**
+         * Whether to show the brightness slider in quick settings panel.
+         * @deprecated Use {@link android.provider.Settings.Secure#QS_SHOW_BRIGHTNESS_SLIDER}
+         * instead
          * @hide
          */
         @Deprecated
-        public static final String QS_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
+        public static final String QS_SHOW_BRIGHTNESS_SLIDER = Secure.QS_SHOW_BRIGHTNESS_SLIDER;
 
         /**
          * Volume keys control cursor in text fields (default is 0)
@@ -5770,8 +5780,8 @@ public final class Settings {
          */
         public static final String THEME_PREV_BOOT_API_LEVEL = "theme_prev_boot_api_level";
 
-        /** Whether to show the brightness slider in quick settings panel.
-         *
+        /**
+         * Whether to show the brightness slider in quick settings panel.
          * @hide
          */
         public static final String QS_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
