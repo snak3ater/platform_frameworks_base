@@ -911,40 +911,59 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mHandlerThread.start();
 
         // Other icons
-        mLocationController = new LocationControllerImpl(mContext); // will post a notification
-        mBatteryController = new BatteryController(mContext, mHandler);
-        mBatteryController.addStateChangedCallback(new BatteryStateChangeCallback() {
-            @Override
-            public void onPowerSaveChanged() {
-                mHandler.post(mCheckBarModes);
-                if (mDozeServiceHost != null) {
-                    mDozeServiceHost.firePowerSaveChanged(mBatteryController.isPowerSave());
+        if (mLocationController == null) {
+            mLocationController = new LocationControllerImpl(mContext); // will post a notification
+        }
+        if (mBatteryController == null) {
+            mBatteryController = new BatteryController(mContext, mHandler);
+            mBatteryController.addStateChangedCallback(new BatteryStateChangeCallback() {
+                @Override
+                public void onPowerSaveChanged() {
+                    mHandler.post(mCheckBarModes);
+                    if (mDozeServiceHost != null) {
+                        mDozeServiceHost.firePowerSaveChanged(mBatteryController.isPowerSave());
+                    }
                 }
-            }
-            @Override
-            public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
-                // noop
-            }
-            @Override
-            public void onBatteryStyleChanged(int style, int percentMode) {
-                // noop
-            }
-        });
+
+                @Override
+                public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
+                    // noop
+                }
+
+                @Override
+                public void onBatteryStyleChanged(int style, int percentMode) {
+                    // noop
+                }
+            });
+        }
         if (mNetworkController == null) {
-                mNetworkController = new NetworkControllerImpl(mContext);
-            }
-        mHotspotController = new HotspotControllerImpl(mContext);
-        mBluetoothController = new BluetoothControllerImpl(mContext, mHandlerThread.getLooper());
-        mSecurityController = new SecurityControllerImpl(mContext);
-        if (mContext.getResources().getBoolean(R.bool.config_showRotationLock)) {
+            mNetworkController = new NetworkControllerImpl(mContext);
+        }
+        if (mHotspotController == null) {
+            mHotspotController = new HotspotControllerImpl(mContext);
+        }
+        if (mBluetoothController == null) {
+            mBluetoothController = new BluetoothControllerImpl(mContext, mHandlerThread.getLooper());
+        }
+        if (mSecurityController == null) {
+            mSecurityController = new SecurityControllerImpl(mContext);
+        }
+        if (mContext.getResources().getBoolean(R.bool.config_showRotationLock)
+                && mRotationLockController == null) {
             mRotationLockController = new RotationLockControllerImpl(mContext);
         }
-        mUserInfoController = new UserInfoController(mContext);
-        mVolumeComponent = getComponent(VolumeComponent.class);
-        if (mVolumeComponent != null) {
+        if (mUserInfoController == null) {
+            mUserInfoController = new UserInfoController(mContext);
+        }
+        if (mVolumeComponent == null) {
+            mVolumeComponent = getComponent(VolumeComponent.class);
+        }
+        if (mZenModeController == null) {
             mZenModeController = mVolumeComponent.getZenController();
         }
-        mCastController = new CastControllerImpl(mContext);
+        if (mCastController == null) {
+            mCastController = new CastControllerImpl(mContext);
+        }
         final SignalClusterView signalCluster =
                 (SignalClusterView) mStatusBarView.findViewById(R.id.signal_cluster);
         final SignalClusterView signalClusterKeyguard =
@@ -993,15 +1012,26 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
 
         mKeyguardBottomArea.setPhoneStatusBar(this);
-        mAccessibilityController = new AccessibilityController(mContext);
+        if (mAccessibilityController == null) {
+            mAccessibilityController = new AccessibilityController(mContext);
+        }
         mKeyguardBottomArea.setAccessibilityController(mAccessibilityController);
-        mNextAlarmController = new NextAlarmController(mContext);
-        mKeyguardMonitor = new KeyguardMonitor();
-
-        if (UserSwitcherController.isUserSwitcherAvailable(UserManager.get(mContext))) {
+        if (mAccessibilityController == null) {
+            mAccessibilityController = new AccessibilityController(mContext);
+        }
+        if (mNextAlarmController == null) {
+            mNextAlarmController = new NextAlarmController(mContext);
+        }
+        if (mKeyguardMonitor == null) {
+            mKeyguardMonitor = new KeyguardMonitor();
+        }
+        if (mUserSwitcherController == null &&
+                    UserSwitcherController.isUserSwitcherAvailable(UserManager.get(mContext))) {
             mUserSwitcherController = new UserSwitcherController(mContext, mKeyguardMonitor);
         }
-        mWeatherController = new WeatherControllerImpl(mContext);
+        if (mWeatherController == null) {
+            mWeatherController = new WeatherControllerImpl(mContext);
+        }
         mKeyguardUserSwitcher = new KeyguardUserSwitcher(mContext,
                 (ViewStub) mStatusBarWindowContent.findViewById(R.id.keyguard_user_switcher),
                 mKeyguardStatusBar, mNotificationPanel, mUserSwitcherController);
@@ -1045,21 +1075,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mBroadcastReceiver.onReceive(mContext,
                 new Intent(pm.isScreenOn() ? Intent.ACTION_SCREEN_ON : Intent.ACTION_SCREEN_OFF));
-
-        // receive broadcasts
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        filter.addAction(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_KEYGUARD_WALLPAPER_CHANGED);
-        if (DEBUG_MEDIA_FAKE_ARTWORK) {
-            filter.addAction("fake_artwork");
-        }
-        filter.addAction(ACTION_DEMO);
-        context.registerReceiverAsUser(mBroadcastReceiver, UserHandle.ALL, filter, null, null);
-
-        // listen for USER_SETUP_COMPLETE setting (per-user)
-        resetUserSetupObserver();
 
         startGlyphRasterizeHack();
         return mStatusBarView;
@@ -3349,6 +3364,22 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     @Override
     public void createAndAddWindows() {
         addStatusBarWindow();
+
+        // listen for USER_SETUP_COMPLETE setting (per-user)
+        resetUserSetupObserver();
+
+        // receive broadcasts
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_KEYGUARD_WALLPAPER_CHANGED);
+        if (DEBUG_MEDIA_FAKE_ARTWORK) {
+            filter.addAction("fake_artwork");
+        }
+        filter.addAction(ACTION_DEMO);
+        mContext.registerReceiverAsUser(mBroadcastReceiver, UserHandle.ALL, filter, null, null);
+
     }
 
     private void addStatusBarWindow() {
@@ -3586,6 +3617,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private void recreateStatusBar() {
         mRecreating = true;
 
+        instantCollapseNotificationPanel();
+
         if (mNetworkController != null) {
             mNetworkController.removeAllSignalClusters();
         }
@@ -3601,7 +3634,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         ArrayList<String> iconSlots = new ArrayList<String>(nIcons);
         RankingMap rankingMap = mNotificationData.getRankingMap();
         for (int i = 0; i < nIcons; i++) {
-            StatusBarIconView iconView = (StatusBarIconView)mStatusIcons.getChildAt(i);
+            StatusBarIconView iconView = (StatusBarIconView) mStatusIcons.getChildAt(i);
             icons.add(iconView.getStatusBarIcon());
             iconSlots.add(iconView.getStatusBarSlot());
         }
@@ -3618,6 +3651,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         // Halts the old ticker. A new ticker is created in makeStatusBarView() so
         // this MUST happen before makeStatusBarView();
         haltTicker();
+
+        // Stop the command queue until the new status bar container settles and has a layout pass
+        mCommandQueue.pause();
 
         makeStatusBarView();
         repositionNavigationBar();
@@ -3641,24 +3677,23 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mNotificationData.filterAndSort();
 
         setAreThereNotifications();
+        mNotificationPanel.setShadeEmpty(!hasActiveNotifications());
 
         mStatusBarWindow.addContent(mStatusBarWindowContent);
 
         updateExpandedViewPos(EXPANDED_LEAVE_ALONE);
         checkBarModes();
 
-        // Stop the command queue until the new status bar container settles and has a layout pass
-        mCommandQueue.pause();
         mStatusBarWindow.requestLayout();
         mStatusBarWindow.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                mStatusBarWindow.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mCommandQueue.resume();
-                mRecreating = false;
-            }
-        });
+                    @Override
+                    public void onGlobalLayout() {
+                        mStatusBarWindow.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        mCommandQueue.resume();
+                        mRecreating = false;
+                    }
+                });
         // restart the keyguard so it picks up the newly created ScrimController
         startKeyguard();
 
