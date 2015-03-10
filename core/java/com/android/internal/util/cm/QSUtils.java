@@ -21,13 +21,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.net.ConnectivityManager;
-import android.nfc.NfcAdapter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -243,7 +243,8 @@ public class QSUtils {
     }
 
     public static boolean deviceSupportsNfc(Context context) {
-        return NfcAdapter.getDefaultAdapter(context) != null;
+        PackageManager packageManager = context.getPackageManager();
+        return packageManager.hasSystemFeature(PackageManager.FEATURE_NFC);
     }
 
     public static boolean deviceSupportsFlashLight(Context context) {
