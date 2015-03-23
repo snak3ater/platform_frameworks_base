@@ -50,7 +50,7 @@ public:
     ZipEntry(void)
         : mDeleted(false), mMarked(false)
         {}
-    ~ZipEntry(void) {}
+    virtual ~ZipEntry(void) {}
 
     /*
      * Returns "true" if the data is compressed.
@@ -343,3 +343,4 @@ private:
 }; // namespace android
 
 #endif // __LIBS_ZIPENTRY_H
+

@@ -780,6 +780,8 @@ class ContextImpl extends Context {
                 final Context outerContext = ctx.getOuterContext();
                 return new TorchManager(outerContext, service);
 
+ 	}});
+
         registerService(THEME_SERVICE, new ServiceFetcher() {
             public Object createService(ContextImpl ctx) {
                 IBinder b = ServiceManager.getService(THEME_SERVICE);

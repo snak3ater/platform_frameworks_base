@@ -1675,3 +1675,4 @@ valid_symbol_name(const String8& symbol)
     }
     return true;
 }
+

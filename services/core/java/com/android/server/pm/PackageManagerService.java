@@ -445,8 +445,8 @@ public class PackageManagerService extends IPackageManager.Stub {
     // Tracks available target package names -> overlay package paths.
     // Example: com.angrybirds -> (com.theme1 -> theme1pkg, com.theme2 -> theme2pkg)
     //          com.facebook   -> (com.theme1 -> theme1pkg)
-    final HashMap<String, HashMap<String, PackageParser.Package>> mOverlays =
-        new HashMap<String, HashMap<String, PackageParser.Package>>();
+    final ArrayMap<String, ArrayMap<String, PackageParser.Package>> mOverlays =
+        new ArrayMap<String, ArrayMap<String, PackageParser.Package>>();
 
     final Settings mSettings;
     boolean mRestoredSettings;
@@ -456,7 +456,7 @@ public class PackageManagerService extends IPackageManager.Stub {
 
     final SparseArray<ArraySet<String>> mSystemPermissions;
     final ArrayMap<String, FeatureInfo> mAvailableFeatures;
-    final HashMap<Signature, HashSet<String>> mSignatureAllowances;
+    final ArrayMap<Signature, ArraySet<String>> mSignatureAllowances;
 
     // If mac_permissions.xml was found for seinfo labeling.
     boolean mFoundPolicyFile;
@@ -547,16 +547,16 @@ public class PackageManagerService extends IPackageManager.Stub {
     private IconPackHelper mIconPackHelper;
 
     private Map<String, Pair<Integer, Long>> mPackageHashes =
-            new HashMap<String, Pair<Integer, Long>>();
+            new ArrayMap<String, Pair<Integer, Long>>();
 
-    private Map<String, Long> mAvailableCommonResources = new HashMap<String, Long>();
+    private Map<String, Long> mAvailableCommonResources = new ArrayMap<String, Long>();
 
     private ThemeConfig mBootThemeConfig;
 
     final ResolveInfo mPreLaunchCheckResolveInfo = new ResolveInfo();
     ComponentName mCustomPreLaunchComponentName;
     private Set<String> mPreLaunchCheckPackages =
-            Collections.synchronizedSet(new HashSet<String>());
+            Collections.synchronizedSet(new ArraySet<String>());
 
     boolean mPreLaunchCheckPackagesReplaced = false;
 
@@ -2754,7 +2754,7 @@ public class PackageManagerService extends IPackageManager.Stub {
 
     private boolean isAllowedSignature(PackageParser.Package pkg, String permissionName) {
         for (Signature pkgSig : pkg.mSignatures) {
-            HashSet<String> perms = mSignatureAllowances.get(pkgSig);
+            ArraySet<String> perms = mSignatureAllowances.get(pkgSig);
             if (perms != null && perms.contains(permissionName)) {
                 return true;
             }
@@ -4220,7 +4220,7 @@ public class PackageManagerService extends IPackageManager.Stub {
         // Some apps like to take on the package name of an existing app so we'll use the
         // "real" package name, if it is non-null, when performing the idmap
         final String pkgName = pkg.mRealPackage != null ? pkg.mRealPackage : pkg.packageName;
-        HashMap<String, PackageParser.Package> overlaySet = mOverlays.get(pkgName);
+        ArrayMap<String, PackageParser.Package> overlaySet = mOverlays.get(pkgName);
         if (overlaySet == null) {
             Slog.e(TAG, "was about to create idmap for " + pkg.baseCodePath + " and " +
                     opkg.baseCodePath + " but target package has no known overlays");
@@ -6492,7 +6492,7 @@ public class PackageManagerService extends IPackageManager.Stub {
             // We must compile resources here because during the initial boot process we may get
             // here before a default theme has had a chance to compile its resources
             if (pkg.mOverlayTargets.isEmpty() && mOverlays.containsKey(pkg.packageName)) {
-                HashMap<String, PackageParser.Package> themes = mOverlays.get(pkg.packageName);
+                ArrayMap<String, PackageParser.Package> themes = mOverlays.get(pkg.packageName);
                 for(PackageParser.Package themePkg : themes.values()) {
                     if (!isBootScan || (mBootThemeConfig != null &&
                             (themePkg.packageName.equals(mBootThemeConfig.getOverlayPkgName()) ||
@@ -6760,9 +6760,9 @@ public class PackageManagerService extends IPackageManager.Stub {
     private void insertIntoOverlayMap(String target, PackageParser.Package opkg) {
         if (!mOverlays.containsKey(target)) {
             mOverlays.put(target,
-                    new HashMap<String, PackageParser.Package>());
+                    new ArrayMap<String, PackageParser.Package>());
         }
-        HashMap<String, PackageParser.Package> map = mOverlays.get(target);
+        ArrayMap<String, PackageParser.Package> map = mOverlays.get(target);
         map.put(opkg.packageName, opkg);
     }
 
@@ -6834,7 +6834,7 @@ public class PackageManagerService extends IPackageManager.Stub {
 
     private void uninstallThemeForAllApps(PackageParser.Package opkg) {
         for(String target : opkg.mOverlayTargets) {
-            HashMap<String, PackageParser.Package> map = mOverlays.get(target);
+            ArrayMap<String, PackageParser.Package> map = mOverlays.get(target);
             if (map != null) {
                 map.remove(opkg.packageName);
 
@@ -6849,7 +6849,7 @@ public class PackageManagerService extends IPackageManager.Stub {
     }
 
     private void uninstallThemeForApp(PackageParser.Package appPkg) {
-        HashMap<String, PackageParser.Package> map = mOverlays.get(appPkg.packageName);
+        ArrayMap<String, PackageParser.Package> map = mOverlays.get(appPkg.packageName);
         if (map == null) return;
 
         for(PackageParser.Package opkg : map.values()) {
@@ -14263,6 +14263,61 @@ public class PackageManagerService extends IPackageManager.Stub {
                     Log.i(TAG, "Removing old resource cache");
                     FileUtils.deleteContents(new File(ThemeUtils.RESOURCE_CACHE_DIR));
                     return;
+                }
+            }
+        }
+    }
+
+    public void getUsageStatsIfNoPackageUsageInfo() {
+        if (!mPackageUsage.isHistoricalPackageUsageAvailable()) {
+            UsageStatsManager usm = (UsageStatsManager) mContext.getSystemService(Context.USAGE_STATS_SERVICE);
+            if (usm == null) {
+                throw new IllegalStateException("UsageStatsManager must be initialized");
+            }
+            long now = System.currentTimeMillis();
+            Map<String, UsageStats> stats = usm.queryAndAggregateUsageStats(now - mDexOptLRUThresholdInMills, now);
+            for (Map.Entry<String, UsageStats> entry : stats.entrySet()) {
+                String packageName = entry.getKey();
+                PackageParser.Package pkg = mPackages.get(packageName);
+                if (pkg == null) {
+                    continue;
+                }
+                UsageStats usage = entry.getValue();
+                pkg.mLastPackageUsageTimeInMills = usage.getLastTimeUsed();
+                mPackageUsage.mIsHistoricalPackageUsageAvailable = true;
+            }
+        }
+    }
+
+    /**
+     * Check and throw if the given before/after packages would be considered a
+     * downgrade.
+     */
+    private static void checkDowngrade(PackageParser.Package before, PackageInfoLite after)
+            throws PackageManagerException {
+        if (after.versionCode < before.mVersionCode) {
+            throw new PackageManagerException(INSTALL_FAILED_VERSION_DOWNGRADE,
+                    "Update version code " + after.versionCode + " is older than current "
+                    + before.mVersionCode);
+        } else if (after.versionCode == before.mVersionCode) {
+            if (after.baseRevisionCode < before.baseRevisionCode) {
+                throw new PackageManagerException(INSTALL_FAILED_VERSION_DOWNGRADE,
+                        "Update base revision code " + after.baseRevisionCode
+                        + " is older than current " + before.baseRevisionCode);
+            }
+
+            if (!ArrayUtils.isEmpty(after.splitNames)) {
+                for (int i = 0; i < after.splitNames.length; i++) {
+                    final String splitName = after.splitNames[i];
+                    final int j = ArrayUtils.indexOf(before.splitNames, splitName);
+                    if (j != -1) {
+                        if (after.splitRevisionCodes[i] < before.splitRevisionCodes[j]) {
+                            throw new PackageManagerException(INSTALL_FAILED_VERSION_DOWNGRADE,
+                                    "Update split " + splitName + " revision code "
+                                    + after.splitRevisionCodes[i] + " is older than current "
+                                    + before.splitRevisionCodes[j]);
+                        }
+                    }
                 }
             }
         }
