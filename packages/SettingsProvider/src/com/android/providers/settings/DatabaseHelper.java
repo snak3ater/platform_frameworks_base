@@ -77,7 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // is properly propagated through your change.  Not doing so will result in a loss of user
     // settings.
 
-    private static final int DATABASE_VERSION = 125;
+    private static final int DATABASE_VERSION = 124;
 
     private Context mContext;
     private int mUserHandle;
@@ -1899,13 +1899,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	if (upgradeVersion < 120) {
-            moveSettingsToNewTable(db, TABLE_SYSTEM, TABLE_SECURE,
-                    new String[] { Settings.Secure.VOLUME_LINK_NOTIFICATION }, true);
-
-            upgradeVersion = 120;
-        }
-
-	if (upgradeVersion < 121) {
             String[] qsTiles = new String[] {
                     Settings.Secure.QS_TILES,
                     Settings.Secure.QS_USE_MAIN_TILES
@@ -1913,13 +1906,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             moveSettingsToNewTable(db, TABLE_SYSTEM, TABLE_SECURE,
                     qsTiles, true);
+            upgradeVersion = 120;
+        }
+
+        if (upgradeVersion < 121) {
+            String[] settingsToMove = new String[] {
+                    Settings.Secure.QS_SHOW_BRIGHTNESS_SLIDER,
+            };
+
+            moveSettingsToNewTable(db, TABLE_SYSTEM, TABLE_SECURE,
+                    settingsToMove, true);
             upgradeVersion = 121;
         }
 
         if (upgradeVersion < 122) {
-            String[] settingsToMove = new String[] {
-                    Settings.Secure.QS_SHOW_BRIGHTNESS_SLIDER,
-            };
+            String[] settingsToMove = Settings.Secure.NAVIGATION_RING_TARGETS;
 
             moveSettingsToNewTable(db, TABLE_SYSTEM, TABLE_SECURE,
                     settingsToMove, true);
@@ -1927,14 +1928,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         if (upgradeVersion < 123) {
-            String[] settingsToMove = Settings.Secure.NAVIGATION_RING_TARGETS;
-
-            moveSettingsToNewTable(db, TABLE_SYSTEM, TABLE_SECURE,
-                    settingsToMove, true);
-            upgradeVersion = 123;
-        }
-
-        if (upgradeVersion < 124) {
             // CM11 used "holo" as a system default theme. For CM12 and up its been
             // switched to "system". So change all "holo" references in themeConfig to "system"
             final String NAME_THEME_CONFIG = "themeConfig";
@@ -1965,10 +1958,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } finally {
                 if (c != null) c.close();
             }
-            upgradeVersion = 124;
+            upgradeVersion = 123;
         }
 
-        if (upgradeVersion == 124) {
+        if (upgradeVersion == 123) {
             db.beginTransaction();
             SQLiteStatement stmt = null;
             try {
@@ -1979,7 +1972,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.endTransaction();
                 if (stmt != null) stmt.close();
             }
-            upgradeVersion = 125;
+            upgradeVersion = 124;
         }
 
         // *** Remember to update DATABASE_VERSION above!
