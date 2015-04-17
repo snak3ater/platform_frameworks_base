@@ -1889,6 +1889,9 @@
     <!-- label for item that reboots the phone in phone options dialog -->
     <string name="global_action_reboot">Redémarrer</string>
 
+    <!-- label for current user in phone options dialog -->
+    <string name="global_action_current_user">Actuel</string>
+
     <!-- label for item that screenshots in phone options dialog -->
     <string name="global_action_screenshot">Capture d\'écran</string>
 
