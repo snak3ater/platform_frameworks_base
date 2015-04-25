@@ -218,5 +218,5 @@
     <string name="def_theme_components"></string>
 
     <!-- Default for Settings.System.STATUS_BAR_BATTERY_STYLE -->
-    <integer name="def_battery_style">0</integer>
+    <integer name="def_battery_style">2</integer>
 </resources>
