@@ -413,6 +413,19 @@
     
     <!-- Screenshot qs tile -->
     <string name="quick_settings_screenshot">Скриншот</string>
+    
+    <!-- Heads up qs tile -->
+    <string name="quick_settings_heads_up_label">Всплывающие уведомления</string>
+
+    <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_heads_up_off">Всплывающие уведомления выкл.</string>
+    <!-- Content description of the heads up tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_heads_up_on">Всплывающие уведомления вкл.</string>
+
+    <!-- Announcement made when heads up changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_heads_up_changed_off">Всплывающие уведомления выкл.</string>
+    <!-- Announcement made when heads up changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_heads_up_changed_on">Всплывающие уведомления вкл.</string>
 
     <!-- Lockscreen shortcuts -->
     <string name="left_shortcut_hint">Проведите вправо для %1$s</string>
@@ -451,4 +464,10 @@
     <string name="navring_choose_action_title">Выбор действия</string>
     <string name="select_application">Выбор приложения</string>
     <string name="lockscreen_target_empty">Пусто</string>
+    
+    <!-- Interruption level: None. [CHAR LIMIT=20] -->
+    <string name="interruption_level_silent">Беззвучный</string>
+
+    <!-- Zen mode: No interruptions title, with a warning about alarms. [CHAR LIMIT=60] -->
+    <string name="zen_silent_with_warning">Никаких оповещений, кроме будильника.</string>
 </resources>
