@@ -424,6 +424,19 @@
     <!-- Screenshot qs tile -->
     <string name="quick_settings_screenshot">Capture d\'écran</string>
 
+    <!-- Heads up qs tile -->
+    <string name="quick_settings_heads_up_label">Notification flottante</string>
+
+    <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_heads_up_off">Notifications flottantes désactivées.</string>
+    <!-- Content description of the heads up tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_heads_up_on">Notifications flottantes activés.</string>
+
+    <!-- Announcement made when heads up changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_heads_up_changed_off">Les notifications flottantes sont désactivées.</string>
+    <!-- Announcement made when heads up changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_heads_up_changed_on">Les notifications flottantes sont activés.</string>
+
     <!-- Lockscreen shortcuts -->
     <string name="left_shortcut_hint">Glisser vers la droite pour %1$s</string>
     <string name="right_shortcut_hint">Glisser vers la gauche pour %1$s</string>
@@ -461,4 +474,13 @@
     <string name="navring_choose_action_title">Choisir l\'action</string>
     <string name="select_application">Sélectionner l\'application</string>
     <string name="lockscreen_target_empty">Vide</string>
+    
+    <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_data_connection_HP">HSPA+</string>
+
+    <!-- Interruption level: None. [CHAR LIMIT=20] -->
+    <string name="interruption_level_silent">silencieux</string>
+
+    <!-- Zen mode: No interruptions title, with a warning about alarms. [CHAR LIMIT=60] -->
+    <string name="zen_silent_with_warning">Pas d\'interruptions, à l\'exception des alarmes.</string>
 </resources>
