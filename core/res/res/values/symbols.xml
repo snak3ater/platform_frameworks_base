@@ -2223,4 +2223,8 @@
   <!-- Theme reset notification -->
   <java-symbol type="string" name="theme_reset_notification_title" />
   <java-symbol type="string" name="theme_reset_notification_body" />
+
+  <!-- global actions -->
+  <java-symbol type="id" name="option4" />
+  <java-symbol type="id" name="option5" />
 </resources>
