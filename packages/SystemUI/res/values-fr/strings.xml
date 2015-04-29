@@ -435,7 +435,19 @@
     <!-- Announcement made when heads up changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_heads_up_changed_off">Les notifications flottantes sont désactivées.</string>
     <!-- Announcement made when heads up changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_heads_up_changed_on">Les notifications flottantes sont activés.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Les notifications flottantes sont activées.</string>
+
+    <string name="quick_settings_ambient_display_label">Luminosité ambiante</string>
+
+    <!-- Content description of the ambient display tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_ambient_display_off">Luminosité ambiante desactivée.</string>
+    <!-- Content description of the ambient display tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_ambient_display_on">Luminosité ambiante activée.</string>
+
+    <!-- Announcement made when ambient display changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_ambient_display_changed_off">La luminosité ambiante est desactivée.</string>
+    <!-- Announcement made when ambient display changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_ambient_display_changed_on">La luminosité ambiante est activée.</string>
 
     <!-- Lockscreen shortcuts -->
     <string name="left_shortcut_hint">Glisser vers la droite pour %1$s</string>
