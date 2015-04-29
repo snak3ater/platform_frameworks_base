@@ -420,12 +420,24 @@
     <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_heads_up_off">Всплывающие уведомления выкл.</string>
     <!-- Content description of the heads up tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_heads_up_on">Всплывающие уведомления вкл.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Всплывающие уведомления</string>
 
     <!-- Announcement made when heads up changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_heads_up_changed_off">Всплывающие уведомления выкл.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Всплывающие уведомления отключены</string>
     <!-- Announcement made when heads up changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_heads_up_changed_on">Всплывающие уведомления вкл.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Всплывающие уведомления включены</string>
+    
+    <string name="quick_settings_ambient_display_label">Ambient Display</string>
+
+    <!-- Content description of the ambient display tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_ambient_display_off">Ambient Display выкл.</string>
+    <!-- Content description of the ambient display tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_ambient_display_on">Ambient Display вкл.</string>
+
+    <!-- Announcement made when ambient display changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient Display выключен.</string>
+    <!-- Announcement made when ambient display changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient Display включен.</string>
 
     <!-- Lockscreen shortcuts -->
     <string name="left_shortcut_hint">Проведите вправо для %1$s</string>

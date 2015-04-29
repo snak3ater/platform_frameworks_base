@@ -1945,4 +1945,19 @@
 
     <!-- label for screen record item in phone options dialog -->
     <string name="global_action_screen_record">Запись экрана</string>
+    
+    <string name="silent_mode_priority">Важные</string>
+    <string name="silent_mode_none">Не беспокоить</string>
+  
+    <!-- Theme installation error notification -->
+    <string name="theme_install_error_title">Не удалось установить тему</string>
+    <string name="theme_install_error_message">Сбой при установке «%s»</string>
+    
+    <!-- Theme reset notification -->
+    <string name="theme_reset_notification_title">Тема отключена</string>
+    <string name="theme_reset_notification_body">Из-за сбоев приложений восстановлена стандартная тема</string>
+    
+    <!-- Notification which notifies user flashlight is enabled -->
+    <string name="quick_settings_tile_flashlight_not_title">Фонарик включен</string>
+    <string name="quick_settings_tile_flashlight_not_summary">Нажмите для выключения</string>
 </resources>
