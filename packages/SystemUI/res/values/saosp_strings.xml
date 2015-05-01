@@ -87,6 +87,7 @@
 
     <!-- Heads up qs tile -->
     <string name="quick_settings_heads_up_label">Heads up</string>
+    <string name="quick_settings_custom_tile_detail_title">Custom Tile</string>
 
     <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_heads_up_on">Heads up enabled</string>
@@ -156,4 +157,6 @@
 
     <!-- Zen mode: No interruptions title, with a warning about alarms. [CHAR LIMIT=60] -->
     <string name="zen_silent_with_warning">No interruptions, except alarms.</string>
+
+    <string name="quick_settings_remove">Remove tile</string>
 </resources>
