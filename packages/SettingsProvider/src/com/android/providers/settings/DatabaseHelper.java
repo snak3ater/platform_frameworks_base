@@ -2620,6 +2620,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     R.integer.def_sleep_timeout);
 
             loadDefaultThemeSettings(stmt);
+
+            loadStringSetting(stmt, Settings.Secure.QS_TILES,
+                    com.android.internal.R.string.config_defaultQuickSettingsTiles);
         } finally {
             if (stmt != null) stmt.close();
         }
