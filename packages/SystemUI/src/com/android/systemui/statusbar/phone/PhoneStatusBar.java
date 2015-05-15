@@ -51,7 +51,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
-import android.content.res.ThemeChangeRequest.RequestType;
 import android.content.res.ThemeConfig;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -3836,12 +3835,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
      * meantime, just update the things that we know change.
      */
     void updateResources(Configuration newConfig) {
+
         // detect theme change.
         ThemeConfig newTheme = newConfig != null ? newConfig.themeConfig : null;
-        final boolean updateStatusBar = shouldUpdateStatusbar(mCurrentTheme, newTheme);
-        if (newTheme != null) mCurrentTheme = (ThemeConfig) newTheme.clone();
-        if (updateStatusBar) {
-            mContext.recreateTheme();
+
+        if (newTheme != null &&
+                (mCurrentTheme == null || !mCurrentTheme.equals(newTheme))) {
+            mCurrentTheme = (ThemeConfig)newTheme.clone();
+	    mContext.recreateTheme();
             recreateStatusBar();
         } else {
             loadDimens();
@@ -3871,30 +3872,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             updateSearchPanel();
 	    checkBarModes();
         }
-    }
-
-    /**
-     * Determines if we need to recreate the status bar due to a theme change.  We currently
-     * check if the overlay for the status bar, fonts, or icons, or forced update count have
-     * changed.
-     *
-     * @param oldTheme
-     * @param newTheme
-     * @return True if we should recreate the status bar
-     */
-    private boolean shouldUpdateStatusbar(ThemeConfig oldTheme, ThemeConfig newTheme) {
-        // no newTheme, so no need to update status bar
-        if (newTheme == null) return false;
-
-        final String overlay = newTheme.getOverlayForStatusBar();
-        final String icons = newTheme.getIconPackPkgName();
-        final String fonts = newTheme.getFontPkgName();
-
-        return oldTheme == null ||
-                (overlay != null && !overlay.equals(oldTheme.getOverlayForStatusBar()) ||
-                (fonts != null && !fonts.equals(oldTheme.getFontPkgName())) ||
-                (icons != null && !icons.equals(oldTheme.getIconPackPkgName())) ||
-                newTheme.getLastThemeChangeRequestType() == RequestType.THEME_UPDATED);
     }
 
     private void updateClockSize() {
