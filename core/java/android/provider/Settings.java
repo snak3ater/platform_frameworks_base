@@ -2986,6 +2986,12 @@ public final class Settings {
         public static final String LOCK_TO_APP_ENABLED = "lock_to_app_enabled";
 
         /**
+         * Enable built in CAF task manager
+         * @hide
+         */
+        public static final String ENABLE_TASK_MANAGER = "enable_task_manager";
+
+        /**
          * @hide
          * Whether national data roaming should be used.
          * @hide
