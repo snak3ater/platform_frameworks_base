@@ -59,12 +59,9 @@ public class ImmersiveModeConfirmation {
     private final Context mContext;
     private final H mHandler;
     private final long mShowDelayMs;
-    private final long mPanicThresholdMs;
-    private final SparseBooleanArray mUserPanicResets = new SparseBooleanArray();
 
     private boolean mConfirmed;
     private ClingWindowView mClingWindow;
-    private long mPanicTime;
     private WindowManager mWindowManager;
     private int mCurrentUserId;
 
@@ -72,8 +69,6 @@ public class ImmersiveModeConfirmation {
         mContext = context;
         mHandler = new H();
         mShowDelayMs = getNavBarExitDuration() * 3;
-        mPanicThresholdMs = context.getResources()
-                .getInteger(R.integer.config_immersive_mode_confirmation_panic);
         mWindowManager = (WindowManager)
                 mContext.getSystemService(Context.WINDOW_SERVICE);
     }
@@ -86,8 +81,6 @@ public class ImmersiveModeConfirmation {
     public void loadSetting(int currentUserId) {
         mConfirmed = false;
         mCurrentUserId = currentUserId;
-        if (DEBUG) Slog.d(TAG, String.format("loadSetting() mCurrentUserId=%d resetForPanic=%s",
-                mCurrentUserId, mUserPanicResets.get(mCurrentUserId, false)));
         String value = null;
         try {
             value = Settings.Secure.getStringForUser(mContext.getContentResolver(),
@@ -129,34 +122,11 @@ public class ImmersiveModeConfirmation {
         }
     }
 
-    public boolean onPowerKeyDown(boolean isScreenOn, long time, boolean inImmersiveMode) {
-        if (!isScreenOn && (time - mPanicTime < mPanicThresholdMs)) {
-            // turning the screen back on within the panic threshold
-            mHandler.sendEmptyMessage(H.PANIC);
-            return mClingWindow == null;
-        }
-        if (isScreenOn && inImmersiveMode) {
-            // turning the screen off, remember if we were in immersive mode
-            mPanicTime = time;
-        } else {
-            mPanicTime = 0;
-        }
-        return false;
-    }
-
     public void confirmCurrentPrompt() {
         if (mClingWindow != null) {
             if (DEBUG) Slog.d(TAG, "confirmCurrentPrompt()");
             mHandler.post(mConfirm);
         }
-    }
-
-    private void handlePanic() {
-        if (DEBUG) Slog.d(TAG, "handlePanic()");
-        if (mUserPanicResets.get(mCurrentUserId, false)) return;  // already reset for panic
-        mUserPanicResets.put(mCurrentUserId, true);
-        mConfirmed = false;
-        saveSetting();
     }
 
     private void handleHide() {
@@ -326,7 +296,6 @@ public class ImmersiveModeConfirmation {
     private final class H extends Handler {
         private static final int SHOW = 1;
         private static final int HIDE = 2;
-        private static final int PANIC = 3;
 
         @Override
         public void handleMessage(Message msg) {
@@ -336,9 +305,6 @@ public class ImmersiveModeConfirmation {
                     break;
                 case HIDE:
                     handleHide();
-                    break;
-                case PANIC:
-                    handlePanic();
                     break;
             }
         }
