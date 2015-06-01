@@ -3136,6 +3136,11 @@ public final class Settings {
          * @hide
          */
         public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+        /**
+         * Enable double tap gesture anywhere on the lock screen put device to sleep
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_ANYWHERE = "double_tap_sleep_anywhere";
 
         /** Whether to show the brightness slider in quick settings panel.
          *
@@ -4394,12 +4399,6 @@ public final class Settings {
          * @hide
          */
         public static final String LOCKSCREEN_TARGETS = "lockscreen_target_actions";
-
-        /**
-         * Long press on lock screen lock icon to sleep
-         * @hide
-         */
-        public static final String LONG_PRESS_LOCK_ICON_TO_SLEEP = "long_press_lock_icon_to_sleep";
 
         /**
          * Comma-separated list of location providers that activities may access. Do not rely on
