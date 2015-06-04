@@ -364,4 +364,11 @@
     <string name="quick_settings_reset_confirmation_title" msgid="748792586749897883">"Скрыть параметр \"<xliff:g id="TILE_LABEL">%1$s</xliff:g>\"?"</string>
     <string name="quick_settings_reset_confirmation_message" msgid="2235970126803317374">"Этот параметр появится в следующий раз, когда вы включите его."</string>
     <string name="quick_settings_reset_confirmation_button" msgid="2660339101868367515">"Скрыть"</string>
+    
+    <!-- Task Manager -->
+    <string name="task_manager_title">Диспетчер Задач</string>
+    <string name="message_switch_fail">Не удается перейти к этой задаче, потому что она не имеет интерфейса.</string>
+    <string name="tasklist_killall">Закрыть все</string>
+    <string name="tasklist_memory_usage">"Свободно/Всего памяти: <xliff:g id="number">%s</xliff:g> / <xliff:g id="name">%s</xliff:g>"</string>
+    <string name="message_keep_one_launcher">Следует оставить хотя бы один лаунчер!</string>
 </resources>
