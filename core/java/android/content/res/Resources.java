@@ -1909,16 +1909,6 @@ public class Resources {
             mCompatibilityInfo.applyToDisplayMetrics(mMetrics);
 
             int configChanges = calcConfigChanges(config);
-
-                /* This is ugly, but modifying the activityInfoConfigToNative
-                 * adapter would be messier */
-                if ((configChanges & ActivityInfo.CONFIG_THEME_RESOURCE) != 0) {
-                    configChanges = ActivityInfo.activityInfoConfigToNative(configChanges);
-                    configChanges |= ActivityInfo.CONFIG_THEME_RESOURCE;
-                } else {
-                    configChanges = ActivityInfo.activityInfoConfigToNative(configChanges);
-                }
-
             if (mConfiguration.locale == null) {
                 mConfiguration.locale = Locale.getDefault();
                 mConfiguration.setLayoutDirection(mConfiguration.locale);
@@ -2003,7 +1993,15 @@ public class Resources {
                 mTmpConfig.setLayoutDirection(mTmpConfig.locale);
             }
             configChanges = mConfiguration.updateFrom(mTmpConfig);
-            configChanges = ActivityInfo.activityInfoConfigToNative(configChanges);
+
+            /* This is ugly, but modifying the activityInfoConfigToNative
+             * adapter would be messier */
+            if ((configChanges & ActivityInfo.CONFIG_THEME_RESOURCE) != 0) {
+                configChanges = ActivityInfo.activityInfoConfigToNative(configChanges);
+                configChanges |= ActivityInfo.CONFIG_THEME_RESOURCE;
+            } else {
+                configChanges = ActivityInfo.activityInfoConfigToNative(configChanges);
+            }
         }
         return configChanges;
     }
