@@ -25,7 +25,7 @@
         <item>369</item><item>157</item>
         <item>369</item><item>0</item>
     </array>
-   
+
     <!-- Cardinal directions for the compass tile -->
     <string-array name="cardinal_directions">
         <item>N</item>  <!-- North -->
@@ -62,4 +62,5 @@
         <item>su</item>
         <item>adb</item>
     </string-array>
+
 </resources>
