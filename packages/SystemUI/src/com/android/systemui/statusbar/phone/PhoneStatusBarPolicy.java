@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.StatusBarManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -24,18 +25,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.telecom.TelecomManager;
 import android.util.Log;
 
 import com.android.internal.telephony.IccCardConstants;
 import com.android.internal.telephony.TelephonyIntents;
+import com.android.internal.util.cm.QSConstants;
+import com.android.internal.util.cm.QSUtils;
+import com.android.internal.util.cm.QSUtils.OnQSChanged;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.CastController;
 import com.android.systemui.statusbar.policy.CastController.CastDevice;
 import com.android.systemui.statusbar.policy.HotspotController;
+
+import java.util.ArrayList;
+
+import cyanogenmod.app.CMStatusBarManager;
+import cyanogenmod.app.CustomTile;
 
 /**
  * This class contains all of the policy about which icons are installed in the status
@@ -106,6 +120,13 @@ public class PhoneStatusBarPolicy {
         }
     };
 
+    private final OnQSChanged mQSListener = new OnQSChanged() {
+        @Override
+        public void onQSChanged() {
+            // processQSChangedLocked();
+        }
+    };
+
     public PhoneStatusBarPolicy(Context context, CastController cast, HotspotController hotspot) {
         mContext = context;
         mCast = cast;
@@ -163,6 +184,8 @@ public class PhoneStatusBarPolicy {
         mService.setIcon(SLOT_HOTSPOT, R.drawable.stat_sys_hotspot, 0, null);
         mService.setIconVisibility(SLOT_HOTSPOT, mHotspot.isHotspotEnabled());
         mHotspot.addCallback(mHotspotCallback);
+
+        QSUtils.registerObserverForQSChanges(mContext, mQSListener);
     }
 
     public void setZenMode(int zen) {
@@ -335,4 +358,18 @@ public class PhoneStatusBarPolicy {
             updateCast();
         }
     };
+
+    private PendingIntent getCustomTilePendingIntent(String pkg) {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.setPackage(pkg);
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return PendingIntent.getActivity(mContext, 0, i, PendingIntent.FLAG_UPDATE_CURRENT, null);
+    }
+
+    private Intent getCustomTileSettingsIntent() {
+        Intent i = new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return i;
+    }
 }
