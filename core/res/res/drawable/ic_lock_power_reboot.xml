@@ -31,4 +31,3 @@
     android:src="@drawable/ic_lock_power_reboot_alpha"
     android:tint="?attr/colorControlNormal" />
 
-
