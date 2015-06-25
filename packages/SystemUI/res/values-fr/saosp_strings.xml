@@ -87,6 +87,7 @@
 
     <!-- Heads up qs tile -->
     <string name="quick_settings_heads_up_label">Notification flottante</string>
+    <string name="quick_settings_custom_tile_detail_title">Tuile personnalisée</string>
 
     <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_heads_up_off">Notifications flottantes désactivées.</string>
@@ -156,4 +157,14 @@
 
     <!-- Zen mode: No interruptions title, with a warning about alarms. [CHAR LIMIT=60] -->
     <string name="zen_silent_with_warning">Pas d\'interruptions, à l\'exception des alarmes.</string>
-</resources>
+    
+    <string name="quick_settings_remove">Retirer la tuile</string>
+
+    <!-- Dynamic tiles -->
+    <string name="quick_settings_dynamic_tile_detail_title">Tuile dynamique</string>
+    <string name="dynamic_qs_tile_next_alarm_label">Prochaine alarme</string>
+    <string name="dynamic_qs_tile_ime_selector_label">Sélecteur de clavier</string>
+    <string name="dynamic_qs_tile_su_label">Accès root</string>
+    <string name="dynamic_qs_tile_adb_label" translatable="false">ADB</string>
+ </resources>
+
