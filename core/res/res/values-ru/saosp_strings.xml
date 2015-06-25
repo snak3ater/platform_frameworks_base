@@ -86,4 +86,17 @@
     <!-- Notification which notifies user flashlight is enabled -->
     <string name="quick_settings_tile_flashlight_not_title">Фонарик включен</string>
     <string name="quick_settings_tile_flashlight_not_summary">Нажмите для выключения</string>
+    
+    <!-- ADB custom tile -->
+    <string name="adb_active_custom_tile">ADB - <xliff:g id="adb_type" example="USB">%1$s</xliff:g></string>
+    <string name="adb_active_custom_tile_both">USB и сеть</string>
+    <string name="adb_active_custom_tile_usb">USB</string>
+    <string name="adb_active_custom_tile_net">Сеть</string>
+    
+    <!-- ADB over network notification -->
+    <string name="adb_net_active_notification_title">Отладка по сети разрешена</string>
+    <!-- ADB over USB and network notification -->
+    <string name="adb_both_active_notification_title">Отладка по сети и USB разрешена</string>
+    <!-- ADB notification message-->
+    <string name="adb_active_generic_notification_message">Нажмите, чтобы отключить отладку.</string>
 </resources>

@@ -52,6 +52,7 @@
     
     <!-- Heads up qs tile -->
     <string name="quick_settings_heads_up_label">Всплывающие уведомления</string>
+    <string name="quick_settings_custom_tile_detail_title">Пользовательская плитка</string>
 
     <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_heads_up_off">Всплывающие уведомления выкл.</string>
@@ -118,4 +119,12 @@
 
     <!-- Zen mode: No interruptions title, with a warning about alarms. [CHAR LIMIT=60] -->
     <string name="zen_silent_with_warning">Никаких оповещений, кроме будильника.</string>
+    
+    <string name="quick_settings_remove">Удалить плитку</string>
+
+    <!-- Dynamic tiles -->
+    <string name="quick_settings_dynamic_tile_detail_title">Динамическая плитка</string>
+    <string name="dynamic_qs_tile_next_alarm_label">Будильник</string>
+    <string name="dynamic_qs_tile_ime_selector_label">Выбор способа ввода</string>
+    <string name="dynamic_qs_tile_su_label">Root доступ</string>
 </resources>
