@@ -127,4 +127,8 @@
     <string name="dynamic_qs_tile_next_alarm_label">Будильник</string>
     <string name="dynamic_qs_tile_ime_selector_label">Выбор способа ввода</string>
     <string name="dynamic_qs_tile_su_label">Root доступ</string>
+    
+    <!-- Battery Saver Dismiss -->
+    <string name="battery_saver_dismiss_title">Скрыть</string>
+    <string name="battery_saver_notification_action_text_short">Выключить</string>
 </resources>
