@@ -166,5 +166,8 @@
     <string name="dynamic_qs_tile_ime_selector_label">Sélecteur de clavier</string>
     <string name="dynamic_qs_tile_su_label">Accès root</string>
     <string name="dynamic_qs_tile_adb_label" translatable="false">ADB</string>
- </resources>
 
+    <!-- Battery Saver Dismiss -->
+    <string name="battery_saver_dismiss_title">Rejeter</string>
+    <string name="battery_saver_notification_action_text_short">Éteindre</string>
+ </resources>
