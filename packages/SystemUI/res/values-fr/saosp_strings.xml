@@ -3,16 +3,16 @@
 /**
  * Copyright (c) 2009, The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
- * See the License for the specific language governing permissions and 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 -->
@@ -31,15 +31,32 @@
 
     <!-- Weather string format in expanded statusbar header -->
     <string name="status_bar_expanded_header_weather_format"><xliff:g id="temp">%1$s</xliff:g> - <xliff:g id="condition">%2$s</xliff:g></string>
-	
-    <!-- QS location sensors -->
-    <!-- Content description of the location tile in quick settings when on, battery saving mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_location_battery_saving">Information de localisation : mode économiseur de batterie.</string>
-    <!-- Content description of the location tile in quick settings when on, sensors only mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_location_gps_only">Information de localisation : mode capteur seul.</string>
-    <!-- Content description of the location tile in quick settings when on, high accuracy mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_location_high_accuracy">Information de localisation : mode haute précision.</string>
-    
+
+    <!-- Content description of the network adb tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_network_adb_off">ADB sur le réseau éteint.</string>
+    <!-- Content description of the network adb tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_network_adb_on">ADB sur le réseau allumé.</string>
+
+    <!-- Announcement made when network adb changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_network_adb_changed_off">ADB sur le réseau est éteint.</string>
+    <!-- Announcement made when network adb changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_network_adb_changed_on">ADB sur le réseau est allumé.</string>
+
+    <!-- Content description of the color inversion tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_color_inversion_off">Inversion des couleurs éteinte.</string>
+    <!-- Content description of the color inversion tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_color_inversion_on">Inversion des couleurs allumée.</string>
+
+    <!-- Content description of the compass tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_compass_off">Boussole éteinte.</string>
+    <!-- Content description of the compass tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_compass_on">Boussole allumée.</string>
+
+    <!-- Announcement made when compass changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_compass_changed_off">La boussole est éteinte.</string>
+    <!-- Announcement made when compass changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_compass_changed_on">La boussole est allumée.</string>
+
     <!-- QuickSettings: Location detail panel title [CHAR LIMIT=NONE] -->
     <string name="quick_settings_location_detail_title">Mode de localisation</string>
     <!-- QuickSettings: Location (On, low-power) [CHAR LIMIT=NONE] -->
@@ -48,7 +65,7 @@
     <string name="quick_settings_location_gps_only_label">Appareil uniquement</string>
     <!-- QuickSettings: Location (On, high-accuracy) [CHAR LIMIT=NONE] -->
     <string name="quick_settings_location_high_accuracy_label">Haute précision.</string>
-    
+
     <!-- NFC qs tile -->
     <string name="quick_settings_nfc_label">NFC</string>
 
@@ -68,6 +85,51 @@
     <string name="quick_settings_expanded_desktop">Étendu</string>
     <string name="quick_settings_expanded_desktop_off">Normal</string>
 
+    <!-- Content description of the hotspot tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_hotspot_off">Point d\'accès mobile éteint.</string>
+    <!-- Content description of the hotspot tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_hotspot_on">Point d\'accès mobile allumé.</string>
+
+    <!-- Content description of the location tile in quick settings when on, battery saving mode (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_location_battery_saving">Information de localisation : mode économiseur de batterie.</string>
+    <!-- Content description of the location tile in quick settings when on, sensors only mode (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_location_gps_only">Information de localisation : mode capteur seul.</string>
+    <!-- Content description of the location tile in quick settings when on, high accuracy mode (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_location_high_accuracy">Information de localisation : mode haute précision.</string>
+
+    <!-- Announcement made when the location tile changes to battery saving (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_location_changed_battery_saving">Information de localisation est changer en mode économie de batterie.</string>
+    <!-- Announcement made when the location tile changes to sensors only (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_location_changed_gps_only">Information de localisation est changer en mode capteur seul.</string>
+    <!-- Announcement made when the location tile changes to high accuracy (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_location_changed_high_accuracy">Information de localisation est changer en mode haute précision.</string>
+
+    <!-- Content description of the LTE tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_lte_off">LTE éteinte.</string>
+    <!-- Content description of the LTE tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_lte_on">LTE allumée.</string>
+
+    <!-- Announcement made when LTE changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_lte_changed_off">LTE est éteinte.</string>
+    <!-- Announcement made when LTE changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_lte_changed_on">LTE est allumée.</string>
+
+    <!-- Content description of the NFC tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_nfc_off">NFC éteinte.</string>
+    <!-- Content description of the NFC tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_nfc_on">NFC allumée.</string>
+
+    <!-- Announcement made when NFC changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_nfc_changed_off">NFC est éteinte.</string>
+    <!-- Announcement made when NFC changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_nfc_changed_on">NFC est allumée.</string>
+
+    <!-- Content description of the screen timeout tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screen_timeout">Mise en veille de l\'écran : <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
+
+    <!-- Announcement made when the screen timeout tile changes (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screen_timeout_changed">Mise en veille de l\'écran modifié pour <xliff:g id="timeout" example="30 seconds">%s</xliff:g>.</string>
+
     <!-- Sync qs tile -->
     <string name="quick_settings_sync_label">Synchronisation</string>
     <!-- Content description of the sync tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
@@ -81,7 +143,17 @@
     <string name="accessibility_quick_settings_sync_changed_on">Synchro est allumée.</string>
 
     <string name="quick_settings_usb_tether_label">Modem USB</string>
-    
+
+    <!-- Content description of the USB tethering tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_usb_tether_off">Modem USB éteint.</string>
+    <!-- Content description of the USB tethering tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_usb_tether_on">Modem USB allumé.</string>
+
+    <!-- Announcement made when USB tethering changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_usb_tether_changed_off">Modem USB est éteint.</string>
+    <!-- Announcement made when USB tethering changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_usb_tether_changed_on">Modem USB est allumée.</string>
+
     <!-- Screenshot qs tile -->
     <string name="quick_settings_screenshot">Capture d\'écran</string>
 
@@ -148,7 +220,7 @@
     <string name="navring_choose_action_title">Choisir l\'action</string>
     <string name="select_application">Sélectionner l\'application</string>
     <string name="lockscreen_target_empty">Vide</string>
-    
+
     <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_data_connection_HP">HSPA+</string>
 
@@ -157,7 +229,7 @@
 
     <!-- Zen mode: No interruptions title, with a warning about alarms. [CHAR LIMIT=60] -->
     <string name="zen_silent_with_warning">Pas d\'interruptions, à l\'exception des alarmes.</string>
-    
+
     <string name="quick_settings_remove">Retirer la tuile</string>
 
     <!-- Dynamic tiles -->
@@ -170,4 +242,7 @@
     <!-- Battery Saver Dismiss -->
     <string name="battery_saver_dismiss_title">Rejeter</string>
     <string name="battery_saver_notification_action_text_short">Éteindre</string>
+
+    <!-- Adb over network tile -->
+    <string name="quick_settings_network_adb_label">ADB sur le réseau</string>
  </resources>
