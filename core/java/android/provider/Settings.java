@@ -3292,6 +3292,13 @@ public final class Settings {
         public static final String RECENTS_SHOW_HIDE_SEARCH_BAR = "recents_show_hide_search_bar";
 
         /**
+         * Three Finger Gesture from Oppo
+         *
+         * @hide
+         */
+        public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
+
+        /**
          * Forces formal text input.  1 to replace emoticon key with enter key.
          * @hide
          */
