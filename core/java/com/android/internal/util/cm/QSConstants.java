@@ -35,6 +35,7 @@ public class QSConstants {
     public static final String TILE_NFC = "nfc";
     public static final String TILE_COMPASS = "compass";
     public static final String TILE_LTE = "lte";
+    public static final String TILE_VOLUME = "volume_panel";
     public static final String TILE_SCREEN_TIMEOUT = "screen_timeout";
     public static final String TILE_SCREEN_OFF = "screen_off";
     public static final String TILE_EXPANDED_DESKTOP = "expanded_desktop";
@@ -55,6 +56,7 @@ public class QSConstants {
     protected static final ArrayList<String> TILES_AVAILABLE = new ArrayList<String>();
 
     static {
+
         TILES_AVAILABLE.add(TILE_WIFI);
         TILES_AVAILABLE.add(TILE_BLUETOOTH);
         TILES_AVAILABLE.add(TILE_CELLULAR);
@@ -78,6 +80,7 @@ public class QSConstants {
         TILES_AVAILABLE.add(TILE_HEADS_UP);
         TILES_AVAILABLE.add(TILE_AMBIENT_DISPLAY);
         TILES_AVAILABLE.add(TILE_ADB_NETWORK);
+        STATIC_TILES_AVAILABLE.add(TILE_VOLUME);
 
         DYNAMIC_TILES_AVAILABLE.add(DYNAMIC_TILE_NEXT_ALARM);
         DYNAMIC_TILES_AVAILABLE.add(DYNAMIC_TILE_IME_SELECTOR);
