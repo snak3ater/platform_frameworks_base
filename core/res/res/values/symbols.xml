@@ -2207,6 +2207,7 @@
   <java-symbol type="drawable" name="stat_notify_privacy_guard_custom_plus_light" />
 
   <!-- Notification and battery light -->
+  <java-symbol type="bool" name="config_adjustableNotificationLedBrightness" />
   <java-symbol type="bool" name="config_intrusiveNotificationLed" />
   <java-symbol type="bool" name="config_multiColorNotificationLed" />
   <java-symbol type="bool" name="config_intrusiveBatteryLed" />
