@@ -31,6 +31,7 @@
 
     <!-- Weather string format in expanded statusbar header -->
     <string name="status_bar_expanded_header_weather_format"><xliff:g id="temp">%1$s</xliff:g> - <xliff:g id="condition">%2$s</xliff:g></string>
+    <string name="weather_info_not_available">Informations météo non disponibles</string>
 
     <!-- Content description of the network adb tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_network_adb_off">ADB sur le réseau éteint.</string>
@@ -177,7 +178,6 @@
     <string name="accessibility_quick_settings_ambient_display_off">Luminosité ambiante desactivée.</string>
     <!-- Content description of the ambient display tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_ambient_display_on">Luminosité ambiante activée.</string>
-
     <!-- Announcement made when ambient display changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_ambient_display_changed_off">La luminosité ambiante est desactivée.</string>
     <!-- Announcement made when ambient display changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
@@ -245,4 +245,9 @@
 
     <!-- Adb over network tile -->
     <string name="quick_settings_network_adb_label">ADB sur le réseau</string>
+    
+    <!-- Development shortcuts -->
+    <string name="advanced_dev_option_wipe_app">Effacer les données d\'applications</string>
+    <string name="advanced_dev_option_force_stop">Forcer l\'arrêt</string>
+    <string name="advanced_dev_option_uninstall">Désinstaller</string>
  </resources>
