@@ -238,30 +238,13 @@ public class NotificationPanelView extends PanelView implements
         mQsContainer = (QSContainer) findViewById(R.id.quick_settings_container);
         mTaskManagerPanel = (LinearLayout) findViewById(R.id.task_manager_panel);
         mQsPanel = (QSPanel) findViewById(R.id.quick_settings_panel);
-
-        mQsPanel.setDetailCallback(new QSPanel.DetailCallback() {
-            @Override
-            public void onDetailChanged(boolean showing) {
-                mQsPanel.setTopOfContainer(mQsContainer.getTop());
-                mQsPanel.setDetailOffset(mScrollView.getScrollY());
-                if (!showing) {
-                    mHandler.removeCallbacks(mCloseQsRunnable);
-                }
-            }
-        });
-
         mClockView = (TextView) findViewById(R.id.clock_view);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll_view);
-        mScrollView.setListener(this);
         mScrollView.setFocusable(false);
         mReserveNotificationSpace = findViewById(R.id.reserve_notification_space);
         mNotificationContainerParent = findViewById(R.id.notification_container_parent);
         mNotificationStackScroller = (NotificationStackScrollLayout)
                 findViewById(R.id.notification_stack_scroller);
-        mNotificationStackScroller.setOnHeightChangedListener(this);
-        mNotificationStackScroller.setOverscrollTopChangedListener(this);
-        mNotificationStackScroller.setOnEmptySpaceClickListener(this);
-        mNotificationStackScroller.setScrollView(mScrollView);
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(getContext(),
                 android.R.interpolator.fast_out_slow_in);
         mFastOutLinearInterpolator = AnimationUtils.loadInterpolator(getContext(),
