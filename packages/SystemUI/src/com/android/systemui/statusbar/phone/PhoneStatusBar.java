@@ -4014,7 +4014,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         if (newTheme != null &&
                 (mCurrentTheme == null || !mCurrentTheme.equals(newTheme))) {
             mCurrentTheme = (ThemeConfig)newTheme.clone();
-	    mContext.recreateTheme();
             recreateStatusBar();
         } else {
             loadDimens();
