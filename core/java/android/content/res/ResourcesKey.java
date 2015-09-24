@@ -25,7 +25,6 @@ public final class ResourcesKey {
     final private boolean mIsThemeable;
     private final int mHash;
     private final IBinder mToken;
-    private final ThemeConfig mThemeConfig;
 
     public final int mDisplayId;
     public final Configuration mOverrideConfiguration = new Configuration();
@@ -40,7 +39,6 @@ public final class ResourcesKey {
         mScale = scale;
         mIsThemeable = isThemeable;
         mToken = token;
-        mThemeConfig = themeConfig;
 
         int hash = 17;
         hash = 31 * hash + (mResDir == null ? 0 : mResDir.hashCode());
@@ -94,18 +92,7 @@ public final class ResourcesKey {
         if (mScale != peer.mScale) {
             return false;
         }
-        if (mIsThemeable != peer.mIsThemeable) {
-            return false;
-        }
-        if (mThemeConfig != peer.mThemeConfig) {
-            if (mThemeConfig == null || peer.mThemeConfig == null) {
-                return false;
-            }
-            if (!mThemeConfig.equals(peer.mThemeConfig)) {
-                return false;
-            }
-        }
-        return true;
+        return mIsThemeable == peer.mIsThemeable;
     }
 
     @Override
